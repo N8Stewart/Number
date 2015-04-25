@@ -1,0 +1,9 @@
+# ignore all .DS_Store files
+.DS_Store
+
+# ignore the bin directory entirely
+/bin
+
+# ignore the eclipse generated files
+.classpath
+.project
