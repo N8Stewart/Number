@@ -73,7 +73,7 @@ public class NaturalNumber implements Number{
 		
 		/* Attempt to construct the NaturalNumber based on the string representation number */
 		for(; i < number.length(); i++){
-			this.digits.push(new Digit(number.charAt(i)));
+			this.digits.add(new Digit(number.charAt(i)));
 		}
 		
 	}
@@ -151,11 +151,11 @@ public class NaturalNumber implements Number{
 				if(return_val == 0){ // make sure the value has not been calculated already
 					return_val = this_digit.compareTo(nat_digit);
 				}
-				
+
 				// Add the digits onto the end oft he queue
 				nat_num.digits.addLast(nat_digit);
 				this.digits.addLast(this_digit);
-				
+
 			}
 		}
 		return 0;
