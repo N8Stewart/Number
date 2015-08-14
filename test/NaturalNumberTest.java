@@ -10,7 +10,7 @@ public class NaturalNumberTest {
      * Ensure a deque is correctly established to hold the digits
      */
     @Test(groups = {"natural_number", "unit"})
-    public void test_Constructor_100(){
+    public void test_Constructor_100() {
 
         NaturalNumber num = null;
         final String rep = "100";
