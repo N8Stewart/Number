@@ -33,7 +33,7 @@ public class NaturalNumber implements Number {
     /**
      * Create a blank Natural Number
      */
-    public NaturalNumber() {
+    private NaturalNumber() {
 
         this.digits = new ArrayDeque<>();
 
@@ -44,7 +44,7 @@ public class NaturalNumber implements Number {
      *
      * @param number the number to be copied from.
      */
-    public NaturalNumber(NaturalNumber number) {
+    public NaturalNumber(final NaturalNumber number) {
 
         this();
 
@@ -60,12 +60,16 @@ public class NaturalNumber implements Number {
      * @throws DigitException         If one of the digits in number is non-numeric.
      * @throws NaturalNumberException if number is not a valid representation of a NaturalNumber.
      */
-    public NaturalNumber(String number) throws DigitException, NaturalNumberException {
+    public NaturalNumber(final String number) throws DigitException, NaturalNumberException {
 
         this();
 
+        if (number == null) {
+            throw new NullPointerException("Cannot construct a NaturalNumber from a null representation.");
+        }
+
         int i = 0;
-		
+
 		/* Filter all leading 0's off of number */
         while (i < number.length() && number.charAt(i) == '0') {
             i++;
@@ -75,7 +79,7 @@ public class NaturalNumber implements Number {
         if (i >= number.length()) {
             throw new NaturalNumberException("Natural Number cannot be 0 or empty.");
         }
-		
+
 		/* Attempt to construct the NaturalNumber based on the string representation number */
         for (; i < number.length(); i++) {
             this.digits.add(new Digit(number.charAt(i)));
@@ -87,7 +91,7 @@ public class NaturalNumber implements Number {
     public String toString() {
 
         StringBuilder number = new StringBuilder();
-		
+
 		/* Construct a string representation of the number */
         this.digits.forEach(number::append);
         return number.toString();
@@ -95,7 +99,7 @@ public class NaturalNumber implements Number {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 
         if (this == obj) // obj is this
             return true;
@@ -126,13 +130,15 @@ public class NaturalNumber implements Number {
     @Override
     public int compareTo(final Number number) {
 
+        if (number == null) {
+            throw new NullPointerException("Cannot compare this to null.");
+        }
+
         NaturalNumber nat_num;
         int return_val = 0;
 
         if (this == number) // ensure number is not this
             return 0;
-        if (number == null) // ensure number is not null
-            return -1;
         if (!(number instanceof NaturalNumber)) // number is not a natural number, so compare this to number
             return number.compareTo(this) * -1; // reverse which number is larger
 

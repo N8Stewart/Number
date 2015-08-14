@@ -1,8 +1,8 @@
 package number;
 
-import java.io.Serializable;
-
 import number.exception.DigitException;
+
+import java.io.Serializable;
 
 /**
  * Class to hold the most basic structure of the Number classes.
@@ -35,11 +35,15 @@ public class Digit implements Serializable, Comparable<Digit> {
     /**
      * Copy the value of digit into this.
      *
-     * @param digit Digit to be copied into this.
+     * @param digit Digit to be copied into this. If empty/null, set this to '0'.
      */
-    public Digit(Digit digit) {
+    public Digit(final Digit digit) {
 
-        this.digit = digit.digit;
+        if (digit == null) {
+            this.digit = '0';
+        } else {
+            this.digit = digit.digit;
+        }
 
     }
 
@@ -49,10 +53,25 @@ public class Digit implements Serializable, Comparable<Digit> {
      * @param digit character value to instantiate Digit.
      * @throws DigitException if digit is not a numerical character, 0-9.
      */
-    public Digit(char digit) throws DigitException {
+    public Digit(final char digit) throws DigitException {
 
         if (isDigit(digit))
             this.digit = digit;
+        else
+            throw new DigitException();
+
+    }
+
+    /**
+     * Attempts to instantiate Digit with a numeric value between 0-9.
+     *
+     * @param digit integer value to instantiate Digit.
+     * @throws DigitException if digit is not a numerical character, 0-9.
+     */
+    public Digit(final int digit) throws DigitException {
+
+        if (isDigit(digit))
+            this.digit = Character.forDigit(digit, 10);
         else
             throw new DigitException();
 
@@ -75,7 +94,7 @@ public class Digit implements Serializable, Comparable<Digit> {
      * @param digit Numerical character between 0 and 9 inclusive.
      * @throws DigitException if digit is not a numerical character, 0-9.
      */
-    public void setDigit(char digit) throws DigitException {
+    public void setDigit(final char digit) throws DigitException {
 
         if (isDigit(digit))
             this.digit = digit;
@@ -87,11 +106,16 @@ public class Digit implements Serializable, Comparable<Digit> {
     /**
      * Copy the value of digit into this.
      *
-     * @param digit Digit to be copied into this.
+     * @param digit Digit to be copied into this. If empty/null, set this to '0'.
      */
-    public void setDigit(Digit digit) {
+    public void setDigit(final Digit digit) {
 
-        this.digit = digit.digit;
+        if (digit == null) {
+            this.digit = '0';
+        } else {
+            this.digit = digit.digit;
+        }
+
 
     }
 
@@ -102,10 +126,7 @@ public class Digit implements Serializable, Comparable<Digit> {
      */
     public boolean isZero() {
 
-        if (this.digit == '0')
-            return true;
-        else
-            return false;
+        return this.digit == '0';
 
     }
 
@@ -115,13 +136,10 @@ public class Digit implements Serializable, Comparable<Digit> {
      * @param digit value to be checked to ensure it is between 0-9
      * @return true if value is a numerical digit, false otherwise.
      */
-    public static boolean isDigit(char digit) {
+    public static boolean isDigit(final char digit) {
 
 		/* ASCII code 48 is '0', code 57 is '9' */
-        if (digit >= 48 && digit <= 57)
-            return true;
-        else
-            return false;
+        return digit >= 48 && digit <= 57;
 
     }
 
@@ -131,13 +149,10 @@ public class Digit implements Serializable, Comparable<Digit> {
      * @param digit value to be checked to ensure it is between 0-9
      * @return true if value is a numerical digit, false otherwise.
      */
-    public static boolean isDigit(int digit) {
-		
+    public static boolean isDigit(final int digit) {
+
 		/* If int is >= 0 and <= 9, it is a digit */
-        if (digit >= 0 && digit <= 9)
-            return true;
-        else
-            return false;
+        return digit >= 0 && digit <= 9;
 
     }
 
@@ -147,12 +162,9 @@ public class Digit implements Serializable, Comparable<Digit> {
      * @return true if this digit is even, false if it is odd
      */
     public boolean isEven() {
-		
+
 		/* Even digits character values end in an even value. e.g. 0 == '48, 2 == '50 */
-        if (((int) this.digit) % 2 == 0)
-            return true;
-        else
-            return false;
+        return ((int) this.digit) % 2 == 0;
 
     }
 
@@ -163,7 +175,12 @@ public class Digit implements Serializable, Comparable<Digit> {
      * @return 0 if digit = this || < 0 if digit > this || > 0 if digit < this
      */
     @Override
-    public int compareTo(Digit digit) {
+    public int compareTo(final Digit digit) {
+
+        if (digit == null) {
+            throw new NullPointerException("Cannot compare this to null.");
+        }
+
         // compare two digits by subtracting the parameter digit from this.digit
         return (this.digit - digit.digit);
     }
@@ -175,7 +192,7 @@ public class Digit implements Serializable, Comparable<Digit> {
      */
     @Override
     public String toString() {
-        return this.digit + "";
+        return String.format("%c", this.digit);
     }
 
 }

@@ -47,6 +47,46 @@ public class DigitTest {
     }
 
     /**
+     * Ensure integer digits are set properly.
+     */
+    @Test(groups = {"digit", "unit"}, expectedExceptions = DigitException.class)
+    public void test_constructor_integer_negative1() throws DigitException {
+        new Digit(-1);
+    }
+
+    /**
+     * Ensure integer digits are set properly.
+     */
+    @Test(groups = {"digit", "unit"}, expectedExceptions = DigitException.class)
+    public void test_constructor_integer_10() throws DigitException {
+        new Digit(10);
+    }
+
+    /**
+     * Ensure integer digits are set properly.
+     */
+    @Test(groups = {"digit", "unit"})
+    public void test_constructor_integer_0() {
+
+        try {
+            new Digit(0);
+            new Digit(1);
+            new Digit(2);
+            new Digit(3);
+            new Digit(4);
+            new Digit(5);
+            new Digit(6);
+            new Digit(7);
+            new Digit(8);
+            new Digit(9);
+        } catch (DigitException e) {
+            Assert.fail("Valid integer value provided to create digit.");
+        }
+
+    }
+
+
+    /**
      * Ensure correct digits are parsed correctly
      */
     @Test(groups = {"digit", "unit"})
@@ -294,6 +334,50 @@ public class DigitTest {
         }
 
         Assert.assertTrue(first.compareTo(second) == 0, "Digits do not match.");
+    }
+
+    /**
+     * Create a digit. Set the digit based on null value. Assert digit is set to 0.
+     */
+    @Test(groups = {"digit", "unit"})
+    public void test_SetDigit_Null() {
+
+        Digit digit = null;
+        final char rep = '1';
+
+        try {
+            digit = new Digit(rep);
+            Assert.assertEquals(digit.getDigit(), rep, "Digit does not match expected");
+        } catch (DigitException e) {
+            Assert.fail("Valid representation provided.");
+        }
+
+        digit.setDigit(null);
+        Assert.assertEquals(digit.getDigit(), '0', "Digit does not match expected.");
+    }
+
+    /**
+     * Create two digits. Set the destination digit based on the source digit. Assert the destination digit is set properly.
+     */
+    @Test(groups = {"digit", "unit"})
+    public void test_SetDigit_fromValidDigit() {
+
+        Digit digitDestination = null;
+        Digit digitSource = null;
+        final char repDestination = '1';
+        final char repSource = '2';
+
+        try {
+            digitSource = new Digit(repSource);
+            digitDestination = new Digit(repDestination);
+            Assert.assertEquals(digitDestination.getDigit(), repDestination, "Digit does not match expected");
+            Assert.assertEquals(digitSource.getDigit(), repSource, "Digit does not match expected");
+        } catch (DigitException e) {
+            Assert.fail("Valid representation provided.");
+        }
+
+        digitDestination.setDigit(digitSource);
+        Assert.assertEquals(digitDestination.getDigit(), digitSource.getDigit(), "Digit does not match expected.");
     }
 
 }
