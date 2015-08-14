@@ -3,7 +3,7 @@ package number.exception;
 /**
  * Generic exception to overwrite generic Exception class.
  */
-public class NumberException extends Exception{
+public class NumberException extends Exception {
 	
 	/**
 	 * @version 0.0.1
