@@ -380,4 +380,47 @@ public class DigitTest {
         Assert.assertEquals(digitDestination.getDigit(), digitSource.getDigit(), "Digit does not match expected.");
     }
 
+    /**
+     * Test the equals method returns correct values
+     */
+    @Test(groups = {"digit", "unit"})
+    public void test_equals() {
+        Digit digit1 = null, digit2 = null, digit3 = null;
+
+        try {
+            digit1 = new Digit(1);
+            digit2 = new Digit(1);
+            digit3 = new Digit(2);
+        } catch (DigitException e) {
+            Assert.fail("Unable to parse digit.");
+        }
+
+        Assert.assertTrue(digit1.equals(digit1), "Identical references not equal");
+        Assert.assertTrue(digit2.equals(digit2), "Identical references not equal");
+        Assert.assertTrue(digit2.equals(digit1), "Digits with the same value not equal");
+        Assert.assertTrue(digit1.equals(digit2), "Digits with the same value not equal");
+        Assert.assertFalse(digit1.equals(digit3), "Digits with different value are equal");
+        Assert.assertFalse(digit1.equals(null), "Digit equals null");
+        Assert.assertFalse(digit1.equals(new String("This should return false.")), "Digit equals String");
+
+    }
+
+    /**
+     * Ensure to String method returns valid string representation of the number
+     */
+    @Test(groups = {"digit", "unit"})
+    public void test_toString() {
+        String rep = "1";
+        Digit digit = null;
+
+        try {
+            digit = new Digit(rep.charAt(0));
+        } catch (DigitException e) {
+            Assert.fail("Unable to parse digit.");
+        }
+
+        Assert.assertEquals(digit.toString(), rep, "String representation does not match expected.");
+
+    }
+
 }
