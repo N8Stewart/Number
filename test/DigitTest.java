@@ -6,11 +6,20 @@ import org.testng.annotations.Test;
 public class DigitTest {
 
     /**
-     * Ensure trash values can't become digits through the constructor.
+     * Ensure digit 0 is created
      */
     @Test(groups = {"digit", "unit"})
     public void test_default_constructor() {
         Digit digit = new Digit(); //This should be 0
+        Assert.assertTrue(digit.isZero());
+    }
+
+    /**
+     * Ensure digit 0 is created
+     */
+    @Test(groups = {"digit", "unit"})
+    public void test_copy_constructor_null() {
+        Digit digit = new Digit(null); //This should be 0
         Assert.assertTrue(digit.isZero());
     }
 
@@ -85,6 +94,24 @@ public class DigitTest {
 
     }
 
+    /**
+     * Ensure correct digits are parsed correctly
+     */
+    @Test(groups = {"digit", "unit"})
+    public void test_copy_constructor_0() {
+
+        Digit digit = null;
+
+        try {
+            digit = new Digit('0');
+        } catch (DigitException e) {
+            Assert.fail("Digit 0 is a valid digit.");
+        }
+
+        Digit result = new Digit(digit);
+        Assert.assertTrue(result.isZero());
+
+    }
 
     /**
      * Ensure correct digits are parsed correctly
