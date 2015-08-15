@@ -54,6 +54,18 @@ public class NaturalNumber implements Number {
     }
 
     /**
+     * TODO: Create NaturalNumber based on Number interface and test in NaturalNumberTest
+     * Copy a NaturalNumber from number into this.
+     *
+     * @param number the number to be copied from.
+     */
+    public NaturalNumber(final Number number) {
+
+        this();
+
+    }
+
+    /**
      * Parse a string and generate a NaturalNumber from the digits.
      *
      * @param number String representation of the number to be stored in this.
