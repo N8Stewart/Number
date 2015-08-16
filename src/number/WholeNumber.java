@@ -1,6 +1,7 @@
 package number;
 
 import number.exception.DigitException;
+import number.exception.WholeNumberException;
 
 public class WholeNumber extends NaturalNumber {
 
@@ -66,6 +67,7 @@ public class WholeNumber extends NaturalNumber {
         try {
             this.digits.add(new Digit('0'));
         } catch (DigitException e) {
+            throw new RuntimeException("Digit unable to be created.");
         }
     }
 
