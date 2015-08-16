@@ -7,6 +7,50 @@ import org.testng.annotations.Test;
 public class NaturalNumberTest {
 
     /**
+     * Requires rep1 and rep2 to be valid NaturalNumbers
+     * Requires assertions to be enabled
+     *
+     * @param rep1 representation of the first NaturalNumber
+     * @param rep2 representation of the second NaturalNumber
+     * @return the result of NN1.compareTo(NN2)
+     */
+    private int compareToHelper(String rep1, String rep2) {
+        try {
+            return new NaturalNumber(rep1).compareTo(new NaturalNumber(rep2));
+        } catch (DigitException e) {
+            Assert.fail("All digits are valid.");
+        } catch (NaturalNumberException e) {
+            Assert.fail("Number is valid.");
+        }
+
+        // Assertions will fail the test, so this will never matter.
+        return 0;
+
+    }
+
+    /**
+     * Requires rep1 and rep2 to be valid NaturalNumbers
+     * Requires assertions to be enabled
+     *
+     * @param rep1 representation of the first NaturalNumber
+     * @param rep2 representation of the second NaturalNumber
+     * @return the result of NN1.equals(NN2)
+     */
+    private boolean equalsHelper(String rep1, String rep2) {
+        try {
+            return new NaturalNumber(rep1).equals(new NaturalNumber(rep2));
+        } catch (DigitException e) {
+            Assert.fail("All digits are valid.");
+        } catch (NaturalNumberException e) {
+            Assert.fail("Number is valid.");
+        }
+
+        // Assertions will fail the test, so this will never matter.
+        return false;
+
+    }
+
+    /**
      * Ensure a deque is correctly established to hold the digits
      */
     @Test(groups = {"natural_number", "unit"})
@@ -161,7 +205,7 @@ public class NaturalNumberTest {
     /**
      * Ensure a very large natural number can be generated
      */
-    @Test(groups = {"natural_number", "unit"}, expectedExceptions = NaturalNumberException.class)
+    @Test(groups = {"natural_number", "unit"}, expectedExceptions = NullPointerException.class)
     public void test_constructor_null_string() throws DigitException, NaturalNumberException {
         new NaturalNumber((String) null);
     }
@@ -169,30 +213,9 @@ public class NaturalNumberTest {
     /**
      * Ensure a very large natural number can be generated
      */
-    @Test(groups = {"natural_number", "unit"}, expectedExceptions = NaturalNumberException.class)
+    @Test(groups = {"natural_number", "unit"}, expectedExceptions = NullPointerException.class)
     public void test_constructor_null_NN() throws DigitException, NaturalNumberException {
         new NaturalNumber((NaturalNumber) null);
-    }
-
-    /**
-     * Requires rep1 and rep2 to be valid NaturalNumbers
-     * Requires assertions to be enabled
-     *
-     * @param rep1 representation of the first NaturalNumber
-     * @param rep2 representation of the second NaturalNumber
-     * @return the result of NN1.compareTo(NN2)
-     */
-    private int compareToHelper(String rep1, String rep2) {
-        try {
-            return new NaturalNumber(rep1).compareTo(new NaturalNumber(rep2));
-        } catch (DigitException e) {
-            Assert.fail("All digits are valid.");
-            return -2;
-        } catch (NaturalNumberException e) {
-            Assert.fail("Number is valid.");
-            return -3;
-        }
-
     }
 
     /**
@@ -202,11 +225,131 @@ public class NaturalNumberTest {
     public void test_compareTo_Valid() {
 
         // compare the two numbers and ensure the expected result is returned
-        Assert.assertEquals(compareToHelper("1", "1"), 0);
-        Assert.assertEquals(compareToHelper("2", "1"), 1);
-        Assert.assertEquals(compareToHelper("3", "1"), 1);
-        Assert.assertEquals(compareToHelper("1", "2"), -1);
-        Assert.assertEquals(compareToHelper("1", "3"), -1);
+        Assert.assertTrue(compareToHelper("1", "1") == 0);
+        Assert.assertTrue(compareToHelper("2", "1") > 0);
+        Assert.assertTrue(compareToHelper("3", "1") > 0);
+        Assert.assertTrue(compareToHelper("1", "2") < 0);
+        Assert.assertTrue(compareToHelper("1", "3") < 0);
+        Assert.assertTrue(compareToHelper("10", "3") > 0);
+        Assert.assertTrue(compareToHelper("11", "10") > 0);
+        Assert.assertTrue(compareToHelper("18", "19") < 0);
+        Assert.assertTrue(compareToHelper("00012", "13") < 0);
+        Assert.assertTrue(compareToHelper("12345678901234567890", "12345678901234567890") == 0);
+        Assert.assertTrue(compareToHelper("12345678901234567890", "12345678901234567891") < 0);
+        Assert.assertTrue(compareToHelper("123456999909876543211234567890", "123456789009876543211234567890") > 0);
+
+    }
+
+    /**
+     * Compare NN to null and ensure a NullPointerException is thrown
+     */
+    @Test(groups = {"natural_number", "unit"}, expectedExceptions = NullPointerException.class)
+    public void test_compareTo_null() throws NaturalNumberException, DigitException {
+        new NaturalNumber("1").compareTo(null);
+    }
+
+    /**
+     * compare a NN to itself and ensure they are equal
+     */
+    @Test(groups = {"natural_number", "unit"})
+    public void test_compareTo_sameNN() throws NaturalNumberException, DigitException {
+
+        NaturalNumber num = new NaturalNumber("1");
+        Assert.assertTrue(num.compareTo(num) == 0, "Natural Number does not equal itself.");
+
+    }
+
+    /**
+     * compare a NN to a different instance with the same value
+     */
+    @Test(groups = {"natural_number", "unit"})
+    public void test_compareTo_sameValue() throws NaturalNumberException, DigitException {
+
+        NaturalNumber num1 = new NaturalNumber("1");
+        NaturalNumber num2 = new NaturalNumber("1");
+        Assert.assertTrue(num1.compareTo(num2) == 0, "Natural Number does not equal itself.");
+
+    }
+
+    /**
+     * Compare two natural numbers and ensure the output is consistent
+     */
+    @Test(groups = {"natural_number", "unit"})
+    public void test_equals_Valid() {
+
+        // compare the two numbers and ensure the expected result is returned
+        Assert.assertTrue(equalsHelper("1", "1"));
+        Assert.assertFalse(equalsHelper("1", "2"));
+        Assert.assertFalse(equalsHelper("3", "1"));
+        Assert.assertFalse(equalsHelper("1", "2"));
+        Assert.assertFalse(equalsHelper("1", "3"));
+        Assert.assertFalse(equalsHelper("10", "3"));
+        Assert.assertFalse(equalsHelper("11", "10"));
+        Assert.assertFalse(equalsHelper("18", "19"));
+        Assert.assertFalse(equalsHelper("00012", "13"));
+        Assert.assertTrue(equalsHelper("00013", "13"));
+        Assert.assertTrue(equalsHelper("12345678901234567890", "12345678901234567890"));
+        Assert.assertFalse(equalsHelper("12345678901234567890", "12345678901234567891"));
+        Assert.assertFalse(equalsHelper("123456999909876543211234567890", "123456789009876543211234567890"));
+
+    }
+
+    /**
+     * Compare NN to null and ensure the equals method returns false
+     */
+    @Test(groups = {"natural_number", "unit"})
+    public void test_equals_null() throws NaturalNumberException, DigitException {
+        Assert.assertFalse(new NaturalNumber("1").equals(null));
+    }
+
+    /**
+     * compare a NN to itself and ensure they are equal
+     */
+    @Test(groups = {"natural_number", "unit"})
+    public void test_equals_sameNN() throws NaturalNumberException, DigitException {
+
+        NaturalNumber num = new NaturalNumber("1");
+        Assert.assertTrue(num.equals(num), "Natural Number does not equal itself.");
+
+    }
+
+    /**
+     * compare a NN to a different instance with the same value
+     */
+    @Test(groups = {"natural_number", "unit"})
+    public void test_equals_sameValue() throws NaturalNumberException, DigitException {
+
+        NaturalNumber num1 = new NaturalNumber("1");
+        NaturalNumber num2 = new NaturalNumber("1");
+        Assert.assertTrue(num1.equals(num2), "Natural Number does not equal itself.");
+
+    }
+
+    /**
+     * compare a NN to a string and ensure the equals method returns false
+     */
+    @Test(groups = {"natural_number", "unit"})
+    public void test_equals_toString() throws NaturalNumberException, DigitException {
+
+        NaturalNumber num1 = new NaturalNumber("1");
+        Assert.assertFalse(num1.equals("this is false."), "Natural Number equals a String somehow.");
+
+    }
+
+    /**
+     * Print a NN as a string and ensure it cmoes back as expected
+     */
+    @Test(groups = {"natural_number", "unit"})
+    public void test_toString() throws NaturalNumberException, DigitException {
+
+        String rep = "123456765432";
+
+        NaturalNumber num = new NaturalNumber(rep);
+        Assert.assertEquals(num.toString(), rep, "Natural Number string representation does not match expected.");
+
+        // Use the copy constructor to create another NN
+        NaturalNumber numCopied = new NaturalNumber(num);
+        Assert.assertEquals(numCopied.toString(), rep, "Natural Number string representation does not match expected.");
 
     }
 

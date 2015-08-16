@@ -43,14 +43,14 @@ public class NaturalNumber implements Number {
      * Copy a NaturalNumber from number into this.
      *
      * @param number the number to be copied from.
-     * @throws NaturalNumberException if number is not a valid representation of a NaturalNumber.
+     * @throws NullPointerException if number is not a valid representation of a NaturalNumber.
      */
-    public NaturalNumber(final NaturalNumber number) throws NaturalNumberException {
+    public NaturalNumber(final NaturalNumber number) {
 
         this();
 
         if (number == null) {
-            throw new NaturalNumberException("Cannot construct a NaturalNumber from a null representation.");
+            throw new NullPointerException("Cannot construct a NaturalNumber from a null representation.");
         }
 
 		/* Loop through all digits in number and create a new Digit for this */
@@ -82,7 +82,7 @@ public class NaturalNumber implements Number {
         this();
 
         if (number == null) {
-            throw new NaturalNumberException("Cannot construct a NaturalNumber from a null representation.");
+            throw new NullPointerException("Cannot construct a NaturalNumber from a null representation.");
         }
 
         int i = 0;
