@@ -28,12 +28,12 @@ public class NaturalNumber implements Number {
     /**
      * Use a stack to represent the digits where the farthest digit on the stack is of the highest order.
      */
-    private Deque<Digit> digits;
+    protected Deque<Digit> digits;
 
     /**
      * Create a blank Natural Number
      */
-    private NaturalNumber() {
+    protected NaturalNumber() {
 
         this.digits = new ArrayDeque<>();
 
