@@ -3,6 +3,9 @@ import number.exception.DigitException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Test for Digit functionality
+ */
 public class DigitTest {
 
     /**

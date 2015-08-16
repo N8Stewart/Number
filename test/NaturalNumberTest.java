@@ -4,6 +4,9 @@ import number.exception.NaturalNumberException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * Test for NaturalNumber functionality
+ */
 public class NaturalNumberTest {
 
     /**
@@ -196,14 +199,13 @@ public class NaturalNumberTest {
             Assert.fail("Number is valid.");
         }
 
-
         // Convert the number back to a string and make sure it is the same
         Assert.assertEquals(result.toString(), rep, "String representation does not match expected.");
 
     }
 
     /**
-     * Ensure a very large natural number can be generated
+     * Ensure a NPE is thrown when a whole number is created using a null String
      */
     @Test(groups = {"natural_number", "unit"}, expectedExceptions = NullPointerException.class)
     public void test_constructor_null_string() throws DigitException, NaturalNumberException {
@@ -211,7 +213,7 @@ public class NaturalNumberTest {
     }
 
     /**
-     * Ensure a very large natural number can be generated
+     * Ensure a NPE is thrown when a whole number is created using a null object
      */
     @Test(groups = {"natural_number", "unit"}, expectedExceptions = NullPointerException.class)
     public void test_constructor_null_NN() throws DigitException, NaturalNumberException {
@@ -337,12 +339,12 @@ public class NaturalNumberTest {
     }
 
     /**
-     * Print a NN as a string and ensure it cmoes back as expected
+     * Print a NN as a string and ensure it comes back as expected
      */
     @Test(groups = {"natural_number", "unit"})
     public void test_toString() throws NaturalNumberException, DigitException {
 
-        String rep = "123456765432";
+        final String rep = "123456765432";
 
         NaturalNumber num = new NaturalNumber(rep);
         Assert.assertEquals(num.toString(), rep, "Natural Number string representation does not match expected.");
