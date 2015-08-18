@@ -1,7 +1,6 @@
 package number;
 
 import number.exception.DigitException;
-import number.exception.WholeNumberException;
 
 public class WholeNumber extends NaturalNumber {
 
@@ -45,7 +44,7 @@ public class WholeNumber extends NaturalNumber {
      * @param number the number to be copied from.
      */
     public WholeNumber(final Number number) {
-        super();
+        super(number);
     }
 
     /**

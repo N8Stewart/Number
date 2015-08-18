@@ -34,9 +34,7 @@ public class NaturalNumber implements Number {
      * Create a blank Natural Number
      */
     protected NaturalNumber() {
-
-        this.digits = new ArrayDeque<>();
-
+        initNaturalNumber();
     }
 
     /**
@@ -102,6 +100,13 @@ public class NaturalNumber implements Number {
             this.digits.add(new Digit(number.charAt(i)));
         }
 
+    }
+
+    /**
+     * Create a blank Natural Number
+     */
+    protected void initNaturalNumber() {
+        this.digits = new ArrayDeque<>();
     }
 
     @Override
