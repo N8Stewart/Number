@@ -38,16 +38,6 @@ public class WholeNumber extends NaturalNumber {
     }
 
     /**
-     * TODO: Create WholeNumber based on Number interface and test in WholeNumberTest
-     * Copy a WholeNumber from number into this.
-     *
-     * @param number the number to be copied from.
-     */
-    public WholeNumber(final Number number) {
-        super(number);
-    }
-
-    /**
      * Copy a WholeNumber from number into this.
      *
      * @param number the number to be copied from.
