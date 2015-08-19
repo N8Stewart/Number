@@ -177,4 +177,11 @@ public class NaturalNumber implements Number {
         return return_val;
     }
 
+    /**
+     * @return true if this number is positive or 0; false otherwise.
+     */
+    public boolean isPositive() {
+        return true;
+    }
+
 }
