@@ -1,6 +1,7 @@
 package number;
 
 import number.exception.DigitException;
+import number.exception.NaturalNumberException;
 
 public class WholeNumber extends NaturalNumber {
 
@@ -10,7 +11,7 @@ public class WholeNumber extends NaturalNumber {
      * @param number String representation of the number to be stored in this.
      * @throws DigitException If one of the digits in number is non-numeric.
      */
-    public WholeNumber(String number) throws DigitException {
+    public WholeNumber(final String number) throws DigitException {
 
         super();
 
@@ -18,22 +19,7 @@ public class WholeNumber extends NaturalNumber {
             throw new NullPointerException("Cannot construct a WholeNumber from a null representation.");
         }
 
-        int i = 0;
-
-		/* Filter all leading 0's off of number */
-        while (i < number.length() && number.charAt(i) == '0') {
-            i++;
-        }
-
-		/* If index is out of bounds, put it back in bounds. Last digit must be a 0 to reach inside this clause. */
-        if (i >= number.length()) {
-            i--;
-        }
-
-		/* Attempt to construct the WholeNumber based on the string representation number */
-        for (; i < number.length(); i++) {
-            this.digits.add(new Digit(number.charAt(i)));
-        }
+        this.parseStringRep(number);
 
     }
 
@@ -58,6 +44,22 @@ public class WholeNumber extends NaturalNumber {
         } catch (DigitException e) {
             throw new RuntimeException("Digit unable to be created.");
         }
+    }
+
+    @Override
+    protected void parseStringRep(final String number) throws DigitException {
+
+        try {
+            super.parseStringRep(number);
+        } catch (NaturalNumberException e) { // Out of bounds, so only digit is 0
+            this.digits.add(new Digit('0'));
+        }
+
+    }
+
+    @Override
+    public boolean isZero() {
+        return this.digits.size() == 1 && this.digits.peek().isZero() ? true : false;
     }
 
 }

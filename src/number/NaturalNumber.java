@@ -52,7 +52,7 @@ public class NaturalNumber implements Number {
         }
 
 		/* Loop through all digits in number and create a new Digit for this */
-        this.digits.addAll(number.digits.stream().map(d -> new Digit(d)).collect(Collectors.toList()));
+        copyFromNumber(number);
 
     }
 
@@ -70,6 +70,23 @@ public class NaturalNumber implements Number {
         if (number == null) {
             throw new NullPointerException("Cannot construct a NaturalNumber from a null representation.");
         }
+
+        this.parseStringRep(number);
+
+    }
+
+    protected void copyFromNumber(final NaturalNumber number) {
+        this.digits.addAll(number.digits.stream().map(d -> new Digit(d)).collect(Collectors.toList()));
+    }
+
+    /**
+     * Parse the string representation of the number.
+     *
+     * @param number - the number to be parsed into a Number.
+     * @throws DigitException         - thrown if a character in the representation is not a numerical digit
+     * @throws NaturalNumberException - thrown if the representation is empty or '0'
+     */
+    protected void parseStringRep(final String number) throws DigitException, NaturalNumberException {
 
         int i = 0;
 
@@ -182,6 +199,13 @@ public class NaturalNumber implements Number {
      */
     public boolean isPositive() {
         return true;
+    }
+
+    /**
+     * @return true if the number representation is zero; false otherwise
+     */
+    public boolean isZero() {
+        return false;
     }
 
 }
