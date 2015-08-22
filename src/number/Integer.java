@@ -70,6 +70,33 @@ public class Integer extends WholeNumber {
     }
 
     @Override
+    public int compareTo(final Number number) {
+
+        // Call the super comparison.
+        final int naturalNumberComparison = super.compareTo(number);
+        int returnVal = 0;
+
+        if (number instanceof NaturalNumber) { // sign has not yet been checked
+            if (this.isPositive()) {
+                if (((NaturalNumber) number).isPositive()) {
+                    returnVal = naturalNumberComparison;
+                } else { // this is positive but number is negative
+                    returnVal = 1;
+                }
+            } else {
+                if (number instanceof Integer && !((Integer) number).isPositive()) {
+                    returnVal = naturalNumberComparison * -1; // larger digits when negative means smaller number
+                } else { // this is negative and number is positive
+                    returnVal = -1;
+                }
+            }
+        }
+
+        return returnVal;
+
+    }
+
+    @Override
     public boolean isPositive() {
         return this.sign > 0;
     }
