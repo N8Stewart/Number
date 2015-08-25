@@ -1,10 +1,11 @@
 package number.impl;
 
 import number.Digit;
+import number.attribute.Zeroable;
 import number.exception.DigitException;
 import number.exception.NaturalNumberException;
 
-public class WholeNumber extends NaturalNumber {
+public class WholeNumber extends NaturalNumber implements Zeroable {
 
     /**
      * Parse a string and generate a WholeNumber from the digits.

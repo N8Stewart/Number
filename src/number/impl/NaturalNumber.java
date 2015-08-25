@@ -203,11 +203,4 @@ public class NaturalNumber implements number.Number {
         return true;
     }
 
-    /**
-     * @return true if the number representation is zero; false otherwise
-     */
-    public boolean isZero() {
-        return false;
-    }
-
 }
