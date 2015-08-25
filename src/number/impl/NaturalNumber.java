@@ -1,7 +1,8 @@
 package number.impl;
 
-import number.*;
+import number.Digit;
 import number.Number;
+import number.attribute.Positivity;
 import number.exception.DigitException;
 import number.exception.NaturalNumberException;
 
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public class NaturalNumber implements number.Number {
+public class NaturalNumber implements Number, Positivity {
 
     /**
      * @version 0.0.2
@@ -196,9 +197,7 @@ public class NaturalNumber implements number.Number {
         return return_val;
     }
 
-    /**
-     * @return true if this number is positive or 0; false otherwise.
-     */
+    @Override
     public boolean isPositive() {
         return true;
     }
