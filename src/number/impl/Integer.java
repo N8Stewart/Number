@@ -1,4 +1,4 @@
-package number;
+package number.impl;
 
 import number.exception.DigitException;
 
@@ -70,7 +70,7 @@ public class Integer extends WholeNumber {
     }
 
     @Override
-    public int compareTo(final Number number) {
+    public int compareTo(final number.Number number) {
 
         // Call the super comparison.
         final int naturalNumberComparison = super.compareTo(number);

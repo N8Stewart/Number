@@ -1,5 +1,5 @@
-import number.NaturalNumber;
-import number.WholeNumber;
+import number.impl.NaturalNumber;
+import number.impl.WholeNumber;
 import number.exception.DigitException;
 import org.testng.Assert;
 import org.testng.annotations.Test;

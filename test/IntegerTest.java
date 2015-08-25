@@ -1,4 +1,4 @@
-import number.Integer;
+import number.impl.Integer;
 import number.exception.DigitException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -462,6 +462,5 @@ public class IntegerTest {
         Assert.assertFalse(num1.equals("this is false."), "Natural Number equals a String somehow.");
 
     }
-
 
 }

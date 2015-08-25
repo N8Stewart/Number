@@ -1,5 +1,6 @@
-package number;
+package number.impl;
 
+import number.Digit;
 import number.exception.DigitException;
 import number.exception.NaturalNumberException;
 

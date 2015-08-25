@@ -1,4 +1,4 @@
-import number.NaturalNumber;
+import number.impl.NaturalNumber;
 import number.exception.DigitException;
 import number.exception.NaturalNumberException;
 import org.testng.Assert;

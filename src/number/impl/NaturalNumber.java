@@ -1,5 +1,7 @@
-package number;
+package number.impl;
 
+import number.*;
+import number.Number;
 import number.exception.DigitException;
 import number.exception.NaturalNumberException;
 
@@ -10,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public class NaturalNumber implements Number {
+public class NaturalNumber implements number.Number {
 
     /**
      * @version 0.0.2
