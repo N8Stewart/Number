@@ -7,3 +7,10 @@
 # ignore the eclipse generated files
 .classpath
 .project
+
+# Ignore the IML files
+*.iml
+
+# Ignore the out and .idea folders
+.idea/
+out/
