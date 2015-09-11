@@ -11,7 +11,7 @@ public class RationalNumberTest {
     /**
      * Ensure a rational number with value '0' is created using the default constructor
      */
-    @Test(groups = {"integer", "unit"})
+    @Test(groups = {"rational_number", "unit"})
     public void test_default_constructor() throws DigitException {
 
         number.impl.RationalNumber rationalNumber = new RationalNumber();
