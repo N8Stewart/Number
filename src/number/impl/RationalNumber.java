@@ -1,6 +1,5 @@
 package number.impl;
 
-import number.Digit;
 import number.Number;
 import number.attribute.Positivity;
 import number.attribute.Zeroable;
@@ -11,19 +10,17 @@ import number.exception.RationalNumberException;
 public class RationalNumber implements Positivity, Zeroable, number.Number {
 
     /**
+     * Used to calculate the hashcode.
+     */
+    private static final int NUM_BINS = 1337;
+    /**
      * Numerator of the Rational Number, Controls positivity and zeroable attributes.
      */
     private Integer numerator;
-
     /**
      * Denominator of the Rational Number
      */
     private NaturalNumber denominator;
-
-    /**
-     * Used to calculate the hashcode.
-     */
-    private static final int NUM_BINS = 1337;
 
     /**
      * Create a RationalNumber with value of 0.
@@ -46,7 +43,6 @@ public class RationalNumber implements Positivity, Zeroable, number.Number {
      * @throws RationalNumberException when a rational number
      */
     public RationalNumber(final String number) throws RationalNumberException {
-
 
 
     }
