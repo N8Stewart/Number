@@ -82,8 +82,10 @@ public class RationalNumber implements Positivity, Zeroable, number.Number {
     @Override
     public String toString() {
 
-
-        return String.format("%s/%s", this.numerator.toString(), this.denominator.toString());
+        if (this.numerator.isZero())
+            return "0";
+        else
+            return String.format("%s/%s", this.numerator.toString(), this.denominator.toString());
 
     }
 
