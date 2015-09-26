@@ -71,8 +71,38 @@ public class RationalNumber implements Positivity, Zeroable, number.Number {
     }
 
     @Override
-    public int compareTo(Number o) {
-        return 0;
+    public int compareTo(final Number number) {
+
+        if (number == null) {
+            throw new NullPointerException("Cannot compare this to null.");
+        }
+
+        int return_val = 0;
+
+        if (this == number) // ensure number is not this
+            return 0;
+        if (number instanceof RationalNumber) {
+            RationalNumber rationalNumber = (RationalNumber) number;
+            if (rationalNumber.isPositive() && this.isPositive()) { // both positive
+
+            } else if (!rationalNumber.isPositive() && this.isPositive()) { // this is bigger
+                return 1;
+            } else if (rationalNumber.isPositive() && !this.isPositive()) { // number is bigger
+                return -1;
+            } else { // Both negative
+
+            }
+        } else if (number instanceof Integer) {
+            Integer integer = (Integer) number;
+        } else if (number instanceof NaturalNumber) {
+            NaturalNumber naturalNumber = (NaturalNumber) number;
+        } else {
+            return number.compareTo(this) * -1;
+        }
+
+
+        return return_val;
+
     }
 
     @Override
